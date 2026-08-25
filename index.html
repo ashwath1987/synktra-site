@@ -237,6 +237,23 @@
   .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease;}
   .reveal.in{opacity:1;transform:translateY(0);}
   @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none;}}
+
+  /* ---------- TOAST ---------- */
+  .toast{
+    position:fixed;left:50%;bottom:28px;z-index:100;
+    transform:translate(-50%,20px);
+    display:flex;align-items:center;gap:12px;
+    background:var(--panel);border:1px solid var(--ok);border-radius:var(--radius);
+    padding:14px 18px;box-shadow:0 20px 40px -20px rgba(0,0,0,.6);
+    opacity:0;pointer-events:none;transition:opacity .25s ease, transform .25s ease;
+    max-width:calc(100% - 40px);
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto;}
+  .toast.error{border-color:#e0725f;}
+  .toast-mark{font-family:'IBM Plex Mono';color:var(--ok);flex-shrink:0;}
+  .toast.error .toast-mark{color:#e0725f;}
+  .toast-text{font-size:14.5px;color:var(--paper);}
+  @media (prefers-reduced-motion: reduce){.toast{transition:none;}}
 </style>
 </head>
 <body>
@@ -444,6 +461,10 @@
           <button type="submit">Send</button>
           <div class="cta-note">We'll reply within one business day.</div>
         </form>
+        <div id="toast" class="toast" role="status" aria-live="polite">
+          <span class="toast-mark mono">✓</span>
+          <span class="toast-text">Query submitted successfully.</span>
+        </div>
       </div>
     </div>
   </section>
@@ -461,6 +482,44 @@
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   },{threshold:0.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Contact form: submit via fetch, redirect home, show toast
+  const ctaForm = document.querySelector('.cta-form');
+  const toast = document.getElementById('toast');
+  let toastTimer;
+
+  function showToast(message, isError){
+    toast.querySelector('.toast-text').textContent = message;
+    toast.querySelector('.toast-mark').textContent = isError ? '!' : '✓';
+    toast.classList.toggle('error', !!isError);
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(()=>toast.classList.remove('show'), 5000);
+  }
+
+  ctaForm.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const submitBtn = ctaForm.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    try{
+      const res = await fetch(ctaForm.action, {
+        method:'POST',
+        body:new FormData(ctaForm),
+        headers:{'Accept':'application/json'}
+      });
+      if(res.ok){
+        ctaForm.reset();
+        window.scrollTo({top:0, behavior:'smooth'});
+        showToast('Query submitted successfully.', false);
+      } else {
+        showToast('Something went wrong. Please try again or email us directly.', true);
+      }
+    } catch(err){
+      showToast('Something went wrong. Please try again or email us directly.', true);
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
 </script>
 
 </body>
