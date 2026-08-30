@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Synktra Solutions — Digital Systems for Manufacturing Plants</title>
-<meta name="description" content="Synktra Solutions builds data platforms, BI, and quality/production systems for automotive and manufacturing plants — engineered by people who've run the shop floor. Think in Sync.">
+<title>Synktra — Digital Systems for Manufacturing Plants</title>
+<meta name="description" content="Synktra builds data platforms, BI, and quality/production systems for automotive and manufacturing plants — engineered by people who've run the shop floor.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -56,34 +56,45 @@
     border-bottom:1px solid var(--line);
     box-shadow:0 8px 24px -16px rgba(0,0,0,.6);
   }
-  nav{display:flex;align-items:center;justify-content:space-between;height:76px;}
-  .logo{display:flex;align-items:center;gap:9px;}
-  .logo .dot{width:7px;height:7px;background:var(--amber);border-radius:50%;display:inline-block;flex-shrink:0;}
-  .logo-lockup{display:flex;flex-direction:column;line-height:1.15;}
-  .logo-name{font-family:'Space Grotesk';font-weight:700;font-size:16.5px;letter-spacing:-.01em;color:var(--paper);white-space:nowrap;}
-  .logo-name .logo-suffix{font-weight:500;color:var(--paper-dim);}
-  .logo-tagline{font-family:'IBM Plex Mono';font-size:9px;font-weight:500;letter-spacing:.18em;color:var(--amber);text-transform:uppercase;margin-top:2px;}
-  @media(max-width:420px){.logo-suffix{display:none;}}
+  nav{display:flex;align-items:center;justify-content:space-between;height:68px;}
+  .logo{font-family:'Space Grotesk';font-weight:700;font-size:19px;letter-spacing:-.02em;display:flex;align-items:center;gap:8px;}
+  .logo .dot{width:7px;height:7px;background:var(--amber);border-radius:50%;display:inline-block;}
   .navlinks{display:flex;gap:34px;font-size:14.5px;color:var(--paper-dim);}
   .navlinks a{text-decoration:none;transition:color .15s;}
   .navlinks a:hover{color:var(--paper);}
   .btn{
+    position:relative;
     font-family:'IBM Plex Mono';
     font-size:13px;
     letter-spacing:.03em;
     text-transform:uppercase;
-    padding:11px 20px;
-    border:1px solid var(--amber);
+    padding:12px 24px;
+    border:1px solid rgba(255,255,255,.16);
     color:var(--amber);
-    background:transparent;
+    background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.02));
+    backdrop-filter:blur(16px) saturate(160%);
+    -webkit-backdrop-filter:blur(16px) saturate(160%);
     text-decoration:none;
-    border-radius:var(--radius);
-    transition:all .15s;
+    border-radius:999px;
+    transition:all .25s cubic-bezier(.2,.8,.2,1);
     white-space:nowrap;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.14), inset 0 -8px 16px -12px rgba(0,0,0,.4), 0 6px 18px -10px rgba(0,0,0,.5);
+    overflow:hidden;
   }
-  .btn:hover{background:var(--amber);color:var(--graphite);transform:translateY(-1px);}
-  .btn-solid{background:var(--amber);color:var(--graphite);font-weight:600;}
-  .btn-solid:hover{background:#7bb8e0;transform:translateY(-1px);}
+  .btn::before{
+    content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+    background:linear-gradient(180deg, rgba(255,255,255,.22) 0%, rgba(255,255,255,0) 45%);
+  }
+  .btn:hover{background:linear-gradient(180deg, rgba(255,255,255,.15), rgba(255,255,255,.04));color:var(--paper);transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.2), inset 0 -8px 16px -12px rgba(0,0,0,.4), 0 10px 24px -10px rgba(0,0,0,.55);}
+  .btn:active{transform:translateY(0) scale(.98);}
+  .btn-solid{
+    background:linear-gradient(180deg, color-mix(in srgb, var(--amber) 92%, white 8%), color-mix(in srgb, var(--amber) 78%, black 6%));
+    color:var(--graphite);font-weight:600;
+    border:1px solid rgba(255,255,255,.35);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.5), inset 0 -10px 16px -12px rgba(0,0,0,.25), 0 10px 26px -10px rgba(79,143,192,.55);
+  }
+  .btn-solid:hover{background:linear-gradient(180deg, color-mix(in srgb, var(--amber) 100%, white 14%), var(--amber));transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -10px 16px -12px rgba(0,0,0,.25), 0 14px 30px -10px rgba(79,143,192,.65);}
+  .btn-solid:active{transform:translateY(0) scale(.98);}
   .navcta{display:none;}
   @media(min-width:760px){.navcta{display:inline-block;}}
   .navlinks{display:none;}
@@ -121,11 +132,19 @@
   .hero p.lede{color:var(--paper-dim);font-size:17.5px;max-width:480px;margin-bottom:32px;}
   .hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
   .btn-ghost{
+    position:relative;
     font-family:'IBM Plex Mono';font-size:13px;letter-spacing:.03em;text-transform:uppercase;
-    padding:11px 20px;color:var(--paper-dim);text-decoration:none;border:1px solid var(--line);border-radius:var(--radius);
-    transition:all .15s;
+    padding:12px 24px;color:var(--paper-dim);text-decoration:none;
+    border:1px solid rgba(255,255,255,.1);border-radius:999px;
+    background:rgba(255,255,255,.03);
+    backdrop-filter:blur(14px) saturate(140%);
+    -webkit-backdrop-filter:blur(14px) saturate(140%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 4px 14px -10px rgba(0,0,0,.5);
+    transition:all .25s cubic-bezier(.2,.8,.2,1);
+    overflow:hidden;
   }
-  .btn-ghost:hover{border-color:var(--paper-dim);color:var(--paper);}
+  .btn-ghost:hover{border-color:rgba(255,255,255,.22);color:var(--paper);background:rgba(255,255,255,.06);transform:translateY(-1px);}
+  .btn-ghost:active{transform:translateY(0) scale(.98);}
 
   /* schematic diagram */
   .schematic{
@@ -136,32 +155,41 @@
     box-shadow:0 24px 48px -20px rgba(0,0,0,.55), 0 1px 0 rgba(255,255,255,.03) inset;
   }
   .schematic-label{font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.12em;color:var(--paper-dim);text-transform:uppercase;margin-bottom:18px;display:flex;justify-content:space-between;}
-  .schematic svg{width:100%;height:auto;display:block;}
+  .schematic svg{width:100%;height:auto;display:block;overflow:visible;}
   .node-label{font-family:'IBM Plex Mono';font-size:10.5px;fill:var(--paper-dim);text-transform:uppercase;letter-spacing:.06em;}
-  .node-title{font-family:'Space Grotesk';font-size:13px;font-weight:600;fill:var(--paper);transition:fill .15s;}
+  .node-title{font-family:'Space Grotesk';font-size:13px;font-weight:600;fill:var(--paper);}
+  .node-arrow{font-family:'Space Grotesk';font-size:15px;fill:var(--amber);opacity:0;transition:opacity .2s;}
   .flow-line{stroke:var(--line);stroke-width:1.5;fill:none;}
   .flow-line-active{stroke:var(--amber);stroke-width:1.5;fill:none;stroke-dasharray:4 4;}
-  .node-box{fill:var(--graphite-2);stroke:var(--line);stroke-width:1;transition:stroke .15s, fill .15s;}
-  .node-box.hot{stroke:var(--amber);}
+  .flow-hit{stroke:transparent;stroke-width:16;fill:none;}
+  .schem-line{cursor:pointer;outline:none;}
+  .schem-line:hover .flow-line-active, .schem-line:focus-visible .flow-line-active{
+    stroke:var(--amber);stroke-width:2.5;filter:drop-shadow(0 0 6px rgba(79,143,192,.6));
+  }
+  .schem-line.route-highlight .flow-line-active{stroke-width:2.5;filter:drop-shadow(0 0 8px rgba(79,143,192,.7));}
+  .node-box{fill:url(#glassFill);stroke:rgba(79,143,192,.55);stroke-width:1;transition:filter .25s;}
+  .schem-node{cursor:pointer;}
+  .schem-node:hover .node-box, .schem-node:focus-visible .node-box{
+    fill:url(#glassFillHover);stroke:var(--amber);filter:drop-shadow(0 0 10px rgba(79,143,192,.55));
+  }
+  .schem-node:hover .node-arrow, .schem-node:focus-visible .node-arrow, .schem-node.active .node-arrow, .schem-node.route-highlight .node-arrow{opacity:1;}
+  .schem-node.active .node-box, .schem-node.route-highlight .node-box{fill:url(#glassFillHover);stroke:var(--amber);stroke-width:1.5;filter:drop-shadow(0 0 12px rgba(79,143,192,.65));}
+  .schem-node{outline:none;}
+  @keyframes pulse-dim{0%,100%{opacity:.4;}50%{opacity:.85;}}
+  .pulse-dim{animation:pulse-dim 2.4s ease-in-out infinite;}
+  @media (prefers-reduced-motion: reduce){.pulse-dim{animation:none;opacity:.7;}}
+  .schem-info{
+    margin-top:20px;padding:16px 18px;min-height:78px;
+    background:linear-gradient(160deg, rgba(79,143,192,.10), rgba(255,255,255,.015));
+    border:1px solid rgba(79,143,192,.28);border-radius:10px;
+    backdrop-filter:blur(10px) saturate(140%);-webkit-backdrop-filter:blur(10px) saturate(140%);
+  }
+  .schem-info-tag{font-family:'IBM Plex Mono';font-size:11px;color:var(--amber);letter-spacing:.08em;margin-bottom:8px;}
+  .schem-info p{font-size:14px;color:var(--paper-dim);line-height:1.5;}
+  .schem-cta{display:block;text-align:center;margin-top:16px;width:100%;}
   .pulse{animation:pulse 2.4s ease-in-out infinite;}
   @keyframes pulse{0%,100%{opacity:.35;}50%{opacity:1;}}
   @media (prefers-reduced-motion: reduce){.pulse{animation:none;opacity:.8;}}
-  .node-group{cursor:pointer;transform-box:fill-box;transform-origin:center;transition:transform .35s cubic-bezier(.22,1,.36,1);}
-  .node-group:hover,.node-group:focus{transform:scale(1.018);}
-  .node-box{transition:stroke .35s cubic-bezier(.22,1,.36,1), fill .35s cubic-bezier(.22,1,.36,1);}
-  .node-group:hover .node-box,.node-group:focus .node-box{stroke:var(--amber);fill:#232a30;}
-  .node-group:hover .node-title,.node-group:focus .node-title{fill:var(--amber);}
-  .node-group:focus{outline:none;}
-  .schematic-tip{
-    margin-top:16px;padding:12px 14px;height:54px;
-    display:flex;align-items:center;overflow:hidden;
-    background:var(--graphite-2);border:1px solid var(--line);border-radius:var(--radius);
-    font-family:'IBM Plex Mono';font-size:12px;line-height:1.55;color:var(--paper-dim);
-  }
-  .schematic-tip span{transition:opacity .28s cubic-bezier(.22,1,.36,1);}
-  @media (prefers-reduced-motion: reduce){
-    .node-group,.node-box,.schematic-tip span{transition:none;}
-  }
 
   /* ---------- CREDIBILITY STRIP ---------- */
   .strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--graphite-2);padding:22px 0;}
@@ -175,6 +203,75 @@
   .sec-head{max-width:620px;margin-bottom:52px;}
   .sec-head h2{font-size:clamp(26px,3.6vw,36px);margin:14px 0 14px;}
   .sec-head p{color:var(--paper-dim);font-size:16px;}
+
+  /* ---------- DIAGNOSTIC ---------- */
+  .diag-panel{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:40px 34px;box-shadow:0 20px 40px -24px rgba(0,0,0,.5);
+  }
+  .diag-progress{display:flex;align-items:center;gap:10px;margin-bottom:30px;}
+  .diag-step{
+    font-family:'IBM Plex Mono';font-size:11.5px;color:var(--paper-dim);letter-spacing:.06em;
+    padding:5px 12px;border:1px solid var(--line);border-radius:20px;transition:all .2s;flex-shrink:0;
+  }
+  .diag-step.active{color:var(--graphite);background:var(--amber);border-color:var(--amber);font-weight:600;}
+  .diag-step.done{color:var(--amber);border-color:var(--amber);}
+  .diag-line{flex:1;height:1px;background:var(--line);}
+  .diag-question{transition:opacity .2s ease;}
+  .diag-question h3{font-size:19px;margin-bottom:6px;}
+  .diag-question .diag-sub{color:var(--paper-dim);font-size:14px;margin-bottom:0;}
+  .diag-options{display:grid;grid-template-columns:1fr;gap:12px;margin-top:24px;}
+  @media(min-width:700px){.diag-options{grid-template-columns:repeat(3,1fr);}}
+  .diag-opt{
+    position:relative;
+    display:flex;flex-direction:column;gap:14px;
+    background:linear-gradient(160deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
+    backdrop-filter:blur(14px) saturate(150%);
+    -webkit-backdrop-filter:blur(14px) saturate(150%);
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:18px;
+    padding:22px 20px;text-align:left;cursor:pointer;font-family:inherit;color:inherit;width:100%;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 10px 24px -18px rgba(0,0,0,.6);
+    transition:transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s cubic-bezier(.2,.8,.2,1), border-color .28s, background .28s;
+    overflow:hidden;
+  }
+  .diag-opt::before{
+    content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+    background:linear-gradient(180deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,0) 50%);
+  }
+  .diag-opt-top{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1;}
+  .diag-opt:hover, .diag-opt:focus-visible{
+    transform:translateY(-4px) scale(1.015);
+    border-color:rgba(79,143,192,.55);
+    background:linear-gradient(160deg, rgba(79,143,192,.16), rgba(255,255,255,.02));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.18), 0 18px 34px -16px rgba(79,143,192,.45);
+    outline:none;
+  }
+  .diag-opt:active{transform:translateY(-1px) scale(.99);}
+  .diag-opt.selected{
+    border-color:var(--amber);
+    background:linear-gradient(160deg, rgba(79,143,192,.24), rgba(255,255,255,.02));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.2), 0 18px 34px -16px rgba(79,143,192,.55), 0 0 0 1px rgba(79,143,192,.3);
+  }
+  .diag-opt-code{
+    font-family:'IBM Plex Mono';font-size:11px;color:var(--amber);letter-spacing:.08em;
+    background:rgba(79,143,192,.14);border:1px solid rgba(79,143,192,.3);
+    padding:3px 9px;border-radius:20px;position:relative;z-index:1;
+  }
+  .diag-opt-arrow{
+    font-size:15px;color:var(--amber);opacity:0;transform:translateX(-4px);
+    transition:opacity .25s, transform .25s;position:relative;z-index:1;
+  }
+  .diag-opt:hover .diag-opt-arrow, .diag-opt.selected .diag-opt-arrow{opacity:1;transform:translateX(0);}
+  .diag-opt-label{font-size:15px;color:var(--paper);line-height:1.35;position:relative;z-index:1;}
+  .diag-result-tag{font-family:'IBM Plex Mono';font-size:12.5px;color:var(--amber);letter-spacing:.1em;margin-bottom:10px;}
+  .diag-result h3{font-size:25px;margin-bottom:14px;}
+  .diag-result p{color:var(--paper-dim);font-size:15.5px;margin-bottom:28px;max-width:540px;}
+  .diag-restart{
+    margin-top:20px;background:none;border:none;color:var(--paper-dim);font-family:'IBM Plex Mono';
+    font-size:12px;letter-spacing:.03em;cursor:pointer;text-decoration:underline;text-underline-offset:3px;
+  }
+  .diag-restart:hover{color:var(--paper);}
 
   /* ---------- SERVICES ---------- */
   .svc-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);}
@@ -195,51 +292,6 @@
   .step .num{font-family:'IBM Plex Mono';font-size:13px;color:var(--steel);margin-bottom:14px;}
   .step h3{font-size:19px;margin-bottom:10px;}
   .step p{color:var(--paper-dim);font-size:14.5px;}
-
-  /* ---------- SCOPE TOOL ---------- */
-  .scope-tool{
-    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
-    padding:36px 32px;display:grid;gap:0;box-shadow:0 20px 40px -24px rgba(0,0,0,.5);
-    max-width:640px;
-  }
-  .scope-step{padding:6px 0;transition:opacity .3s ease;}
-  .scope-label{
-    font-family:'IBM Plex Mono';font-size:11.5px;color:var(--paper-dim);letter-spacing:.1em;
-    margin-bottom:14px;display:flex;align-items:baseline;gap:4px;flex-wrap:wrap;
-  }
-  .scope-step-num{
-    display:inline-flex;align-items:center;justify-content:center;
-    width:20px;height:20px;border-radius:50%;border:1px solid var(--line);
-    color:var(--paper-dim);font-size:11px;margin-right:6px;transition:all .3s ease;
-  }
-  .scope-step.is-active .scope-step-num,.scope-step.is-done .scope-step-num{border-color:var(--amber);color:var(--amber);}
-  .scope-hint{font-style:italic;font-weight:400;color:var(--paper-dim);text-transform:none;letter-spacing:0;font-size:11.5px;}
-  .scope-options{display:flex;flex-wrap:wrap;gap:10px;}
-  .scope-chip{
-    font-family:'IBM Plex Mono';font-size:13px;padding:10px 16px;
-    border:1px solid var(--line);background:var(--graphite);color:var(--paper-dim);
-    border-radius:var(--radius);cursor:pointer;transition:all .15s;
-  }
-  .scope-chip:hover{border-color:var(--paper-dim);color:var(--paper);}
-  .scope-chip.active{border-color:var(--amber);color:var(--amber);background:rgba(79,143,192,.08);}
-  .scope-step-locked{opacity:.4;}
-  .scope-step-locked .scope-options{pointer-events:none;}
-  .scope-connector{
-    width:1px;height:22px;background:var(--line);margin:4px 0 4px 10px;transition:background .3s ease;
-  }
-  .scope-connector.is-active{background:var(--amber);}
-  .scope-result{
-    border-top:1px solid var(--line);margin-top:20px;padding-top:24px;min-height:32px;
-  }
-  .scope-result-placeholder{color:var(--paper-dim);font-size:14.5px;font-style:italic;}
-  .scope-result-card{display:grid;gap:12px;opacity:0;transform:translateY(8px);animation:scopeIn .35s ease forwards;}
-  @keyframes scopeIn{to{opacity:1;transform:translateY(0);}}
-  .scope-result-row{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px;}
-  .scope-result-label{font-family:'IBM Plex Mono';font-size:11.5px;color:var(--paper-dim);text-transform:uppercase;letter-spacing:.08em;}
-  .scope-result-value{font-family:'Space Grotesk';font-size:22px;color:var(--steel);font-weight:600;}
-  .scope-result-note{color:var(--paper-dim);font-size:14.5px;}
-  .scope-result-card .btn{justify-self:start;margin-top:4px;}
-  @media (prefers-reduced-motion: reduce){.scope-result-card{animation:none;opacity:1;transform:none;}}
 
   /* ---------- WHO ---------- */
   .who{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:44px 36px;display:grid;gap:34px;box-shadow:0 20px 40px -24px rgba(0,0,0,.5);}
@@ -288,20 +340,14 @@
   .cta-form input:focus,.cta-form textarea:focus{outline:2px solid var(--amber);outline-offset:1px;border-color:var(--amber);}
   .cta-form button{
     font-family:'IBM Plex Mono';font-size:13px;letter-spacing:.03em;text-transform:uppercase;
-    background:var(--amber);color:var(--graphite);border:none;padding:13px 20px;border-radius:var(--radius);cursor:pointer;font-weight:600;
+    background:linear-gradient(180deg, color-mix(in srgb, var(--amber) 92%, white 8%), color-mix(in srgb, var(--amber) 78%, black 6%));
+    color:var(--graphite);border:1px solid rgba(255,255,255,.35);padding:13px 20px;border-radius:999px;cursor:pointer;font-weight:600;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.5), inset 0 -10px 16px -12px rgba(0,0,0,.25), 0 10px 26px -10px rgba(79,143,192,.55);
+    transition:all .25s cubic-bezier(.2,.8,.2,1);
   }
-  .cta-form button:hover{background:#7bb8e0;}
+  .cta-form button:hover{background:linear-gradient(180deg, color-mix(in srgb, var(--amber) 100%, white 14%), var(--amber));transform:translateY(-1px);}
+  .cta-form button:active{transform:translateY(0) scale(.98);}
   .cta-note{font-family:'IBM Plex Mono';font-size:11.5px;color:var(--paper-dim);}
-  .hp-field{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;}
-  .cta-alt{
-    margin-top:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;
-    font-size:13.5px;color:var(--paper-dim);
-  }
-  .whatsapp-link{
-    color:var(--ok);text-decoration:none;font-family:'IBM Plex Mono';font-size:12.5px;letter-spacing:.02em;
-    border-bottom:1px solid transparent;transition:border-color .15s;
-  }
-  .whatsapp-link:hover{border-bottom-color:var(--ok);}
 
   /* ---------- FOOTER ---------- */
   footer{border-top:1px solid var(--line);padding:36px 0;}
@@ -313,23 +359,6 @@
   .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease;}
   .reveal.in{opacity:1;transform:translateY(0);}
   @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none;}}
-
-  /* ---------- TOAST ---------- */
-  .toast{
-    position:fixed;left:50%;bottom:28px;z-index:100;
-    transform:translate(-50%,20px);
-    display:flex;align-items:center;gap:12px;
-    background:var(--panel);border:1px solid var(--ok);border-radius:var(--radius);
-    padding:14px 18px;box-shadow:0 20px 40px -20px rgba(0,0,0,.6);
-    opacity:0;pointer-events:none;transition:opacity .25s ease, transform .25s ease;
-    max-width:calc(100% - 40px);
-  }
-  .toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto;}
-  .toast.error{border-color:#e0725f;}
-  .toast-mark{font-family:'IBM Plex Mono';color:var(--ok);flex-shrink:0;}
-  .toast.error .toast-mark{color:#e0725f;}
-  .toast-text{font-size:14.5px;color:var(--paper);}
-  @media (prefers-reduced-motion: reduce){.toast{transition:none;}}
 </style>
 </head>
 <body>
@@ -337,15 +366,10 @@
 <header>
   <div class="wrap">
     <nav>
-      <div class="logo">
-        <span class="dot"></span>
-        <div class="logo-lockup">
-          <span class="logo-name">SYNKTRA <span class="logo-suffix">SOLUTIONS</span></span>
-          <span class="logo-tagline">Think in Sync</span>
-        </div>
-      </div>
+      <div class="logo"><span class="dot"></span>SYNKTRA</div>
       <div class="navlinks">
         <a href="#services">Services</a>
+        <a href="#diagnostic">Find my fit</a>
         <a href="#approach">Approach</a>
         <a href="#who">Who we work with</a>
         <a href="#about">About</a>
@@ -363,53 +387,105 @@
         <div>
           <div class="eyebrow">Automotive &amp; Manufacturing Digital Systems</div>
           <h1>We connect the<br>shop floor to <em>insight.</em></h1>
-          <p class="lede">Synktra Solutions designs and implements data platforms, BI, and quality/production systems for automotive and manufacturing plants — built by people who've run the systems, not just sold them.</p>
+          <p class="lede">Synktra designs and implements data platforms, BI, and quality/production systems for automotive and manufacturing plants — built by people who've run the systems, not just sold them.</p>
           <div class="hero-actions">
             <a href="#contact" class="btn btn-solid">Start a conversation</a>
             <a href="#services" class="btn-ghost">See what we build</a>
           </div>
         </div>
         <div class="schematic reveal">
-          <div class="schematic-label"><span>SYS // PLANT-TO-INSIGHT PIPELINE</span><span>REV. 01</span></div>
+          <div class="schematic-label"><span>SYS // PLANT-TO-INSIGHT PIPELINE</span><span>REV. 01 — click a node</span></div>
           <svg viewBox="0 0 460 260" xmlns="http://www.w3.org/2000/svg">
-            <g class="node-group" tabindex="0" role="button" aria-label="Source: Plant, SAP, MES" data-tip="Every dashboard starts here — plant floor, SAP, and MES data captured at the source, not reconstructed after the fact.">
-              <rect class="node-box hot" x="10" y="30" width="120" height="56" rx="2"/>
+            <defs>
+              <linearGradient id="glassFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="rgba(79,143,192,0.28)"/>
+                <stop offset="100%" stop-color="rgba(79,143,192,0.10)"/>
+              </linearGradient>
+              <linearGradient id="glassFillHover" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="rgba(79,143,192,0.48)"/>
+                <stop offset="100%" stop-color="rgba(79,143,192,0.20)"/>
+              </linearGradient>
+            </defs>
+
+            <g id="node-source" class="schem-node" tabindex="0" role="button" data-default="true"
+               data-tag="SOURCE // 01" data-title="Plant / SAP / MES"
+               data-desc="Raw production, quality, and ERP data — exactly as it exists on your shop floor today, before anything is cleaned or connected.">
+              <rect class="node-box" x="10" y="30" width="120" height="56" rx="9"/>
               <text class="node-label" x="20" y="48">SOURCE</text>
+              <text class="node-arrow" x="118" y="48" text-anchor="end">›</text>
               <text class="node-title" x="20" y="68">Plant / SAP / MES</text>
             </g>
 
-            <g class="node-group" tabindex="0" role="button" aria-label="Pipeline: Data Platform" data-tip="One governed data lake — plant, ERP, and machine data unified into a single pipeline, not another silo.">
-              <rect class="node-box" x="170" y="30" width="120" height="56" rx="2"/>
+            <g id="node-pipeline" class="schem-node" tabindex="0" role="button"
+               data-tag="PIPELINE // 02" data-title="Data Platform"
+               data-desc="A governed data platform that ingests, cleans, and structures that raw data into something dashboards and apps can actually trust.">
+              <rect class="node-box" x="170" y="30" width="120" height="56" rx="9"/>
               <text class="node-label" x="180" y="48">PIPELINE</text>
+              <text class="node-arrow" x="278" y="48" text-anchor="end">›</text>
               <text class="node-title" x="180" y="68">Data Platform</text>
             </g>
 
-            <g class="node-group" tabindex="0" role="button" aria-label="Output: BI Dashboard" data-tip="Power BI dashboards for production, quality, and downtime — built for daily use, not quarterly reviews.">
-              <rect class="node-box hot" x="330" y="10" width="120" height="56" rx="2"/>
+            <g id="node-bi" class="schem-node" tabindex="0" role="button"
+               data-tag="OUTPUT // 03A" data-title="BI Dashboard"
+               data-desc="Real-time production, quality, and downtime dashboards — the numbers plant managers actually open every morning.">
+              <rect class="node-box" x="330" y="10" width="120" height="56" rx="9"/>
               <text class="node-label" x="340" y="28">OUTPUT</text>
+              <text class="node-arrow" x="438" y="28" text-anchor="end">›</text>
               <text class="node-title" x="340" y="48">BI Dashboard</text>
             </g>
 
-            <g class="node-group" tabindex="0" role="button" aria-label="Output: Quality App" data-tip="Low-code quality-check and production-tracking apps, deployed directly to the people running the line.">
-              <rect class="node-box" x="330" y="90" width="120" height="56" rx="2"/>
+            <g id="node-app" class="schem-node" tabindex="0" role="button"
+               data-tag="OUTPUT // 03B" data-title="Business App"
+               data-desc="Whatever workflow your plant still runs on spreadsheets — a quality checklist, production tracker, demand forecast, or sales &amp; ops planning tool — built as a fast, purpose-built app instead.">
+              <rect class="node-box" x="330" y="90" width="120" height="56" rx="9"/>
               <text class="node-label" x="340" y="108">OUTPUT</text>
-              <text class="node-title" x="340" y="128">Quality App</text>
+              <text class="node-arrow" x="438" y="108" text-anchor="end">›</text>
+              <text class="node-title" x="340" y="128">Business App</text>
             </g>
 
-            <path class="flow-line-active pulse" d="M130 58 L170 58"/>
-            <path class="flow-line-active pulse" d="M290 58 L 310 58 L 310 38 L 330 38"/>
-            <path class="flow-line" d="M290 58 L 310 58 L 310 118 L 330 118"/>
+            <g id="line-source-pipeline" class="schem-line" tabindex="0" role="button"
+               data-tag="ROUTE // SOURCE → PLATFORM" data-title="Ingestion"
+               data-desc="Plant, SAP, and MES data flows into one governed platform — the first step before anything can be dashboarded, traced, or built into an app."
+               data-highlight="node-source node-pipeline line-source-pipeline">
+              <path class="flow-hit" d="M130 58 L170 58"/>
+              <path class="flow-line-active pulse" d="M130 58 L170 58"/>
+            </g>
 
-            <g class="node-group" tabindex="0" role="button" aria-label="Traceability and governance" data-tip="Blockchain-based traceability and governance run underneath every layer, end to end.">
-              <rect class="node-box" x="10" y="170" width="440" height="56" rx="2"/>
+            <g id="line-pipeline-bi" class="schem-line" tabindex="0" role="button"
+               data-tag="ROUTE // PLATFORM → BI" data-title="To BI Dashboard"
+               data-desc="Source → Data Platform → BI Dashboard: unify shop floor and ERP data through a governed platform, then surface it in real-time dashboards leadership actually opens every morning."
+               data-highlight="node-source node-pipeline node-bi line-source-pipeline line-pipeline-bi">
+              <path class="flow-hit" d="M290 58 L 310 58 L 310 38 L 330 38"/>
+              <path class="flow-line-active pulse" d="M290 58 L 310 58 L 310 38 L 330 38"/>
+            </g>
+
+            <g id="line-pipeline-app" class="schem-line" tabindex="0" role="button"
+               data-tag="ROUTE // PLATFORM → APP" data-title="To Business App"
+               data-desc="Source → Data Platform → Business App: once your data is unified, we build the specific tool your team needs — quality, production, planning, or forecasting — instead of another spreadsheet."
+               data-highlight="node-source node-pipeline node-app line-source-pipeline line-pipeline-app">
+              <path class="flow-hit" d="M290 58 L 310 58 L 310 118 L 330 118"/>
+              <path class="flow-line-active pulse" d="M290 58 L 310 58 L 310 118 L 330 118"/>
+            </g>
+
+            <g id="node-trace" class="schem-node" tabindex="0" role="button"
+               data-tag="TRACE // 001-A" data-title="Traceability + governance"
+               data-desc="Traceability and governance run underneath every layer, so every number on the dashboard can be traced back to its source.">
+              <rect class="node-box" x="10" y="170" width="440" height="56" rx="9"/>
               <text class="node-label" x="20" y="188">TRACE // 001-A</text>
+              <text class="node-arrow" x="438" y="188" text-anchor="end">›</text>
               <text class="node-title" x="20" y="208">Traceability + governance runs underneath every layer</text>
             </g>
-            <path class="flow-line" d="M70 170 L70 86"/>
-            <path class="flow-line" d="M230 170 L230 86"/>
-            <path class="flow-line" d="M390 170 L390 146"/>
+            <path class="flow-line pulse-dim" d="M70 170 L70 86"/>
+            <path class="flow-line pulse-dim" d="M230 170 L230 86"/>
+            <path class="flow-line pulse-dim" d="M390 170 L390 146"/>
           </svg>
-          <div class="schematic-tip mono" id="schematicTip"><span id="schematicTipText">Hover or tap a node to see what it does →</span></div>
+
+          <div class="schem-info" id="schemInfo">
+            <div class="schem-info-tag" id="schemInfoTag">SOURCE // 01</div>
+            <p id="schemInfoDesc">Raw production, quality, and ERP data — exactly as it exists on your shop floor today, before anything is cleaned or connected.</p>
+          </div>
+
+          <a href="#diagnostic" class="btn btn-solid schem-cta">Find your starting point →</a>
         </div>
       </div>
     </div>
@@ -422,9 +498,125 @@
       <div class="strip-item">SAP <b>S/4HANA</b></div>
       <div class="strip-item">MES &amp; <b>shop-floor systems</b></div>
       <div class="strip-item">Blockchain <b>part traceability</b></div>
-      <div class="strip-item"><b>Part &amp; production planning</b></div>
+      <div class="strip-item">Anaplan <b>supply &amp; production planning</b></div>
     </div>
   </div>
+
+  <!-- DIAGNOSTIC -->
+  <section id="diagnostic">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">Find your starting point</div>
+        <h2>Three questions. One recommendation.</h2>
+        <p>No need to read all six services — answer this and we'll point you at the right one.</p>
+      </div>
+
+      <div class="diag-panel reveal">
+        <div class="diag-progress">
+          <span class="diag-step active" data-step="1">Q1</span>
+          <span class="diag-line"></span>
+          <span class="diag-step" data-step="2">Q2</span>
+          <span class="diag-line"></span>
+          <span class="diag-step" data-step="3">Q3</span>
+        </div>
+
+        <div class="diag-question" data-q="1">
+          <h3>Where does your plant data live today?</h3>
+          <p class="diag-sub">Pick the closest fit.</p>
+          <div class="diag-options">
+            <button class="diag-opt" data-q="1" data-v="manual">
+              <span class="diag-opt-top">
+                <span class="diag-opt-code">D1</span>
+                <span class="diag-opt-arrow" aria-hidden="true">&#8594;</span>
+              </span>
+              <span class="diag-opt-label">Spreadsheets &amp; paper logs</span>
+            </button>
+            <button class="diag-opt" data-q="1" data-v="erp">
+              <span class="diag-opt-top">
+                <span class="diag-opt-code">D2</span>
+                <span class="diag-opt-arrow" aria-hidden="true">&#8594;</span>
+              </span>
+              <span class="diag-opt-label">ERP / SAP only</span>
+            </button>
+            <button class="diag-opt" data-q="1" data-v="scattered">
+              <span class="diag-opt-top">
+                <span class="diag-opt-code">D3</span>
+                <span class="diag-opt-arrow" aria-hidden="true">&#8594;</span>
+              </span>
+              <span class="diag-opt-label">Scattered across many systems</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="diag-question" data-q="2" hidden>
+          <h3>What's the most urgent problem?</h3>
+          <p class="diag-sub">The thing that actually keeps you up at night.</p>
+          <div class="diag-options">
+            <button class="diag-opt" data-q="2" data-v="realtime">
+              <span class="diag-opt-top">
+                <span class="diag-opt-code">P1</span>
+                <span class="diag-opt-arrow" aria-hidden="true">&#8594;</span>
+              </span>
+              <span class="diag-opt-label">Can't see production / quality in real time</span>
+            </button>
+            <button class="diag-opt" data-q="2" data-v="trust">
+              <span class="diag-opt-top">
+                <span class="diag-opt-code">P2</span>
+                <span class="diag-opt-arrow" aria-hidden="true">&#8594;</span>
+              </span>
+              <span class="diag-opt-label">Data exists but nobody trusts it</span>
+            </button>
+            <button class="diag-opt" data-q="2" data-v="trace">
+              <span class="diag-opt-top">
+                <span class="diag-opt-code">P3</span>
+                <span class="diag-opt-arrow" aria-hidden="true">&#8594;</span>
+              </span>
+              <span class="diag-opt-label">No way to trace parts or lots</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="diag-question" data-q="3" hidden>
+          <h3>What's the scale?</h3>
+          <p class="diag-sub">This shapes how we'd size the first pilot.</p>
+          <div class="diag-options">
+            <button class="diag-opt" data-q="3" data-v="single">
+              <span class="diag-opt-top">
+                <span class="diag-opt-code">S1</span>
+                <span class="diag-opt-arrow" aria-hidden="true">&#8594;</span>
+              </span>
+              <span class="diag-opt-label">Single line or plant</span>
+            </button>
+            <button class="diag-opt" data-q="3" data-v="multi">
+              <span class="diag-opt-top">
+                <span class="diag-opt-code">S2</span>
+                <span class="diag-opt-arrow" aria-hidden="true">&#8594;</span>
+              </span>
+              <span class="diag-opt-label">Multiple plants</span>
+            </button>
+            <button class="diag-opt" data-q="3" data-v="supply">
+              <span class="diag-opt-top">
+                <span class="diag-opt-code">S3</span>
+                <span class="diag-opt-arrow" aria-hidden="true">&#8594;</span>
+              </span>
+              <span class="diag-opt-label">Whole supply chain</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="diag-result" hidden>
+          <div class="diag-result-tag">REC // 00</div>
+          <h3 class="diag-result-title">Recommendation</h3>
+          <p class="diag-result-desc">—</p>
+          <div class="hero-actions">
+            <a href="#services" class="btn-ghost">See all services</a>
+            <a href="#contact" class="btn btn-solid">Start a conversation</a>
+          </div>
+          <div><button class="diag-restart">↺ Start over</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- SERVICES -->
   <section id="services">
@@ -497,40 +689,6 @@
     </div>
   </section>
 
-  <!-- SCOPE TOOL -->
-  <section id="scope" style="padding-top:0;">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div class="eyebrow">Try it</div>
-        <h2>See what a first pilot could look like.</h2>
-        <p>Two quick questions, one at a time — no form, no email required yet.</p>
-      </div>
-      <div class="scope-tool reveal">
-        <div class="scope-step is-active" id="scopeStep1">
-          <div class="scope-label"><span class="scope-step-num">1</span> WHICH SYSTEM</div>
-          <div class="scope-options" data-group="system">
-            <button type="button" class="scope-chip" data-value="data-platform">Data Platform &amp; BI</button>
-            <button type="button" class="scope-chip" data-value="quality-app">Quality / Production App</button>
-            <button type="button" class="scope-chip" data-value="traceability">Part Traceability</button>
-            <button type="button" class="scope-chip" data-value="sap">SAP S/4HANA Advisory</button>
-          </div>
-        </div>
-        <div class="scope-connector" id="scopeConnector"></div>
-        <div class="scope-step scope-step-locked" id="scopeStep2">
-          <div class="scope-label"><span class="scope-step-num">2</span> HOW MUCH SCALE <span class="scope-hint" id="scopeHint">— pick a system above first</span></div>
-          <div class="scope-options" data-group="scale">
-            <button type="button" class="scope-chip" data-value="single-line">One line</button>
-            <button type="button" class="scope-chip" data-value="one-plant">Multiple lines, one plant</button>
-            <button type="button" class="scope-chip" data-value="multi-plant">Multiple plants</button>
-          </div>
-        </div>
-        <div class="scope-result" id="scopeResult">
-          <div class="scope-result-placeholder">Answer both above to see a rough pilot estimate.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- WHO WE WORK WITH -->
   <section id="who">
     <div class="wrap">
@@ -555,17 +713,17 @@
     <div class="wrap">
       <div class="about-row reveal">
         <div>
-          <div class="eyebrow">Why Synktra Solutions</div>
+          <div class="eyebrow">Why Synktra</div>
           <h2>Run by someone who's worked the systems, not just sold them.</h2>
         </div>
         <div>
-          <p>Synktra Solutions was founded on a simple observation: most digital transformation consultancies pitching manufacturing plants have never actually run a plant's systems. Ours has.</p>
+          <p>Synktra was founded on a simple observation: most digital transformation consultancies pitching manufacturing plants have never actually run a plant's systems. Ours has.</p>
           <p>Fifteen-plus years across MES engineering, automotive product development, and manufacturing IT leadership — including SAP S/4HANA rollouts, blockchain-based part traceability for commercial vehicle manufacturing, and supply chain planning platforms.</p>
           <div class="cred-mono">
             MES engineering — automotive shop-floor systems<br>
             SAP S/4HANA — manufacturing &amp; supply chain<br>
-            Blockchain traceability — part-level tracking<br>
-            Part &amp; production planning
+            Blockchain traceability — HCV part-level tracking<br>
+            Anaplan — supply &amp; production planning
           </div>
         </div>
       </div>
@@ -581,32 +739,22 @@
           <h2>Tell us the problem. We'll tell you if we're a fit.</h2>
           <p>No sales deck, no lock-in pitch — just a straight read on whether this is worth pursuing, and what a pilot would look like.</p>
         </div>
-        <form class="cta-form" action="https://formspree.io/f/xgawjzjq" method="POST">
-          <input type="text" name="_gotcha" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <form class="cta-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
           <input type="text" name="name" placeholder="Name" required>
           <input type="email" name="email" placeholder="Work email" required>
-          <input type="tel" name="phone" placeholder="Phone (optional)">
           <textarea name="message" rows="3" placeholder="What are you trying to solve?" required></textarea>
           <button type="submit">Send</button>
-          <div class="cta-note">We'll reply within one business day.</div>
+          <div class="cta-note">Replace YOUR_FORM_ID with your real Formspree endpoint before launch.</div>
         </form>
-        <div class="cta-alt">
-          <span>Prefer a quicker chat?</span>
-          <a href="https://wa.me/918056192357?text=Hi%20Synktra%2C%20I%27d%20like%20to%20talk%20about..." target="_blank" rel="noopener" class="whatsapp-link">Message us on WhatsApp →</a>
-        </div>
       </div>
     </div>
   </section>
 </main>
 
-<div id="toast" class="toast" role="status" aria-live="polite">
-  <span class="toast-mark mono">✓</span>
-  <span class="toast-text">Query submitted successfully.</span>
-</div>
-
 <footer>
   <div class="wrap">
-    <div class="fmono">© 2026 Synktra Solutions.</div>
+    <div class="fmono">© 2026 Synktra. Automotive &amp; manufacturing digital systems.</div>
+    <div class="fmono"><a href="mailto:hello@synktra.in">hello@synktra.in</a></div>
   </div>
 </footer>
 
@@ -616,140 +764,106 @@
   },{threshold:0.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  // Contact form: submit via fetch, redirect home, show toast
-  const ctaForm = document.querySelector('.cta-form');
-  const toast = document.getElementById('toast');
-  let toastTimer;
+  // ---- Hero schematic (clickable nodes + routes) ----
+  (function(){
+    const nodes = document.querySelectorAll('.schem-node');
+    const lines = document.querySelectorAll('.schem-line');
+    const allSelectable = document.querySelectorAll('.schem-node, .schem-line');
+    const tagEl = document.getElementById('schemInfoTag');
+    const descEl = document.getElementById('schemInfoDesc');
 
-  function showToast(message, isError){
-    toast.querySelector('.toast-text').textContent = message;
-    toast.querySelector('.toast-mark').textContent = isError ? '!' : '✓';
-    toast.classList.toggle('error', !!isError);
-    toast.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(()=>toast.classList.remove('show'), 5000);
-  }
-
-  // Interactive schematic: show a detail tip on hover/focus of each node, cross-faded so text swaps don't jump
-  const schematicTipText = document.getElementById('schematicTipText');
-  const defaultTip = 'Hover or tap a node to see what it does →';
-  let tipFadeTimer;
-  function setSchematicTip(text){
-    clearTimeout(tipFadeTimer);
-    schematicTipText.style.opacity = '0';
-    tipFadeTimer = setTimeout(()=>{
-      schematicTipText.textContent = text;
-      schematicTipText.style.opacity = '1';
-    }, 140);
-  }
-  document.querySelectorAll('.node-group').forEach(g=>{
-    const tip = g.getAttribute('data-tip');
-    g.addEventListener('mouseenter', ()=> setSchematicTip(tip));
-    g.addEventListener('mouseleave', ()=> setSchematicTip(defaultTip));
-    g.addEventListener('focus', ()=> setSchematicTip(tip));
-    g.addEventListener('blur', ()=> setSchematicTip(defaultTip));
-  });
-
-  // Pilot scoping tool
-  const scopeData = {
-    'data-platform': { label:'Data Platform & BI',
-      'single-line':{time:'4–6 weeks', note:'One pipeline, one dashboard, one line — proof the data model holds up before scaling.'},
-      'one-plant':{time:'6–10 weeks', note:'Unify plant and ERP data across lines with a shared governance layer.'},
-      'multi-plant':{time:'10+ weeks, phased', note:'Rolled out plant by plant on the same platform, sequenced with your team.'}
-    },
-    'quality-app': { label:'Quality / Production App',
-      'single-line':{time:'2–4 weeks', note:'One working quality-check or production-tracking app on the shop floor.'},
-      'one-plant':{time:'4–6 weeks', note:'Rolled out to multiple lines with shared reporting.'},
-      'multi-plant':{time:'6–10 weeks, phased', note:'Deployed plant by plant, one working version at a time.'}
-    },
-    'traceability': { label:'Part Traceability',
-      'single-line':{time:'6–8 weeks', note:'Blockchain-based tracking piloted on one part family, one line.'},
-      'one-plant':{time:'8–12 weeks', note:'Extended across lines with the same chain-of-custody model.'},
-      'multi-plant':{time:'12+ weeks, phased', note:'Rolled out plant by plant once the pilot model is proven.'}
-    },
-    'sap': { label:'SAP S/4HANA Advisory',
-      'single-line':{time:'Scoping call first', note:'S/4HANA timelines depend on your migration stage — this one needs a conversation, not a guess.'},
-      'one-plant':{time:'Scoping call first', note:'Advisory scope depends heavily on where you are in the migration.'},
-      'multi-plant':{time:'Scoping call first', note:'Advisory scope depends heavily on where you are in the migration.'}
+    function clearAll(){
+      nodes.forEach(n=>n.classList.remove('active','route-highlight'));
+      lines.forEach(l=>l.classList.remove('route-highlight'));
     }
-  };
-  let scopeSystem = null, scopeScale = null;
-  const scopeResult = document.getElementById('scopeResult');
-  const scopeStep1 = document.getElementById('scopeStep1');
-  const scopeStep2 = document.getElementById('scopeStep2');
-  const scopeConnector = document.getElementById('scopeConnector');
-  const scopeHint = document.getElementById('scopeHint');
 
-  document.querySelectorAll('.scope-options').forEach(group=>{
-    group.addEventListener('click', (e)=>{
-      const btn = e.target.closest('.scope-chip');
-      if(!btn) return;
-      group.querySelectorAll('.scope-chip').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      if(group.dataset.group === 'system'){
-        scopeSystem = btn.dataset.value;
-        scopeStep1.classList.add('is-done');
-        scopeConnector.classList.add('is-active');
-        scopeStep2.classList.remove('scope-step-locked');
-        scopeStep2.classList.add('is-active');
-        scopeHint.style.display = 'none';
-      } else {
-        scopeScale = btn.dataset.value;
-        scopeStep2.classList.add('is-done');
-      }
-      renderScopeResult();
-    });
-  });
-
-  function renderScopeResult(){
-    if(!scopeSystem || !scopeScale){
-      if(scopeSystem){
-        scopeResult.innerHTML = '<div class="scope-result-placeholder">Now pick a scale above to see the estimate.</div>';
-      }
-      return;
+    function selectNode(node){
+      clearAll();
+      node.classList.add('active');
+      if(tagEl) tagEl.textContent = node.dataset.tag;
+      if(descEl) descEl.textContent = node.dataset.desc;
     }
-    const sys = scopeData[scopeSystem];
-    const d = sys[scopeScale];
-    scopeResult.innerHTML = `
-      <div class="scope-result-card">
-        <div class="scope-result-row">
-          <span class="scope-result-label">Rough pilot estimate — ${sys.label}</span>
-          <span class="scope-result-value">${d.time}</span>
-        </div>
-        <p class="scope-result-note">${d.note} This is a starting point — we'll refine it on a call.</p>
-        <a href="#contact" class="btn" id="scopeCta">Talk through this scope</a>
-      </div>`;
-    document.getElementById('scopeCta').addEventListener('click', ()=>{
-      const msg = document.querySelector('textarea[name="message"]');
-      if(msg && !msg.value){
-        msg.value = `Interested in a pilot for ${sys.label} (${scopeScale.replace('-', ' ')}).`;
-      }
-    });
-  }
 
-  ctaForm.addEventListener('submit', async (e)=>{
-    e.preventDefault();
-    const submitBtn = ctaForm.querySelector('button[type="submit"]');
-    submitBtn.disabled = true;
-    try{
-      const res = await fetch(ctaForm.action, {
-        method:'POST',
-        body:new FormData(ctaForm),
-        headers:{'Accept':'application/json'}
+    function selectLine(line){
+      clearAll();
+      const ids = (line.dataset.highlight || '').split(' ').filter(Boolean);
+      ids.forEach(id=>{
+        const el = document.getElementById(id);
+        if(el) el.classList.add('route-highlight');
       });
-      if(res.ok){
-        ctaForm.reset();
-        window.scrollTo({top:0, behavior:'smooth'});
-        showToast('Query submitted successfully.', false);
-      } else {
-        showToast('Something went wrong. Please try again or email us directly.', true);
-      }
-    } catch(err){
-      showToast('Something went wrong. Please try again or email us directly.', true);
-    } finally {
-      submitBtn.disabled = false;
+      if(tagEl) tagEl.textContent = line.dataset.tag;
+      if(descEl) descEl.textContent = line.dataset.desc;
     }
-  });
+
+    allSelectable.forEach(el=>{
+      const handler = ()=> el.classList.contains('schem-line') ? selectLine(el) : selectNode(el);
+      el.addEventListener('click', handler);
+      el.addEventListener('keydown', (e)=>{
+        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); handler(); }
+      });
+    });
+
+    const defaultNode = document.querySelector('.schem-node[data-default="true"]');
+    if(defaultNode) selectNode(defaultNode);
+  })();
+
+  // ---- Diagnostic ----
+  (function(){
+    const opts = document.querySelectorAll('.diag-opt');
+    const questions = document.querySelectorAll('.diag-question');
+    const steps = document.querySelectorAll('.diag-step');
+    const resultEl = document.querySelector('.diag-result');
+    const restartBtn = document.querySelector('.diag-restart');
+    const answers = {};
+
+    const recommendations = {
+      realtime:{tag:'BI // 02', title:'Plant BI & Dashboards', desc:"Start with dashboards that surface production, downtime, and quality in real time \u2014 the fastest way to stop flying blind."},
+      trust:{tag:'DL // 01', title:'Manufacturing Data Platforms', desc:"Before another dashboard, the data underneath needs a governed home. We'd start by architecting a data platform your reports can actually trust."},
+      trace:{tag:'TRC // 04', title:'Part Traceability', desc:"Blockchain-based part and lot traceability, built on the same approach used in commercial vehicle manufacturing."}
+    };
+    const scaleText = {single:'a single line or plant', multi:'one plant at a time, then rolled out', supply:'your extended supply chain'};
+
+    opts.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const q = btn.dataset.q;
+        answers[q] = btn.dataset.v;
+        document.querySelectorAll('.diag-opt[data-q="'+q+'"]').forEach(b=>b.classList.remove('selected'));
+        btn.classList.add('selected');
+
+        const nextQ = String(parseInt(q,10)+1);
+        const currentBlock = document.querySelector('.diag-question[data-q="'+q+'"]');
+        const nextBlock = document.querySelector('.diag-question[data-q="'+nextQ+'"]');
+
+        setTimeout(()=>{
+          currentBlock.hidden = true;
+          if(nextBlock){
+            nextBlock.hidden = false;
+            steps.forEach(s=>{
+              const sv = s.dataset.step;
+              s.classList.toggle('done', parseInt(sv,10) <= parseInt(q,10));
+              s.classList.toggle('active', sv === nextQ);
+            });
+          } else {
+            steps.forEach(s=>{s.classList.add('done'); s.classList.remove('active');});
+            const rec = recommendations[answers['2']] || recommendations.realtime;
+            resultEl.querySelector('.diag-result-tag').textContent = rec.tag;
+            resultEl.querySelector('.diag-result-title').textContent = rec.title;
+            resultEl.querySelector('.diag-result-desc').textContent = rec.desc + " We'd size the first pilot for " + (scaleText[answers['3']] || 'your plant') + '.';
+            resultEl.hidden = false;
+          }
+        }, 120);
+      });
+    });
+
+    if(restartBtn){
+      restartBtn.addEventListener('click', ()=>{
+        resultEl.hidden = true;
+        questions.forEach((q)=>{ q.hidden = q.dataset.q !== '1'; });
+        steps.forEach(s=>{ s.classList.remove('done'); s.classList.toggle('active', s.dataset.step === '1'); });
+        document.querySelectorAll('.diag-opt.selected').forEach(b=>b.classList.remove('selected'));
+      });
+    }
+  })();
 </script>
 
 </body>
