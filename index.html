@@ -49,6 +49,39 @@
   .mono{font-family:'IBM Plex Mono', monospace;}
 
   /* ---------- NAV ---------- */
+  .site-banner{
+    position:fixed;top:0;left:0;right:0;z-index:200;
+    transform:translateY(-100%);opacity:0;
+    transition:transform .4s cubic-bezier(.2,.8,.2,1), opacity .4s;
+    pointer-events:none;
+  }
+  .site-banner.show{transform:translateY(0);opacity:1;pointer-events:auto;}
+  .site-banner-inner{
+    max-width:720px;margin:14px auto 0;padding:14px 18px;
+    display:flex;align-items:center;gap:12px;
+    background:linear-gradient(160deg, rgba(94,201,143,.18), rgba(20,23,26,.92));
+    border:1px solid rgba(94,201,143,.4);border-radius:14px;
+    backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);
+    box-shadow:0 20px 40px -16px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.1);
+  }
+  .site-banner.error .site-banner-inner{
+    background:linear-gradient(160deg, rgba(230,72,60,.18), rgba(20,23,26,.92));
+    border-color:rgba(230,72,60,.4);
+  }
+  .site-banner-icon{
+    flex-shrink:0;width:22px;height:22px;border-radius:50%;
+    background:var(--ok);color:var(--graphite);font-size:13px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .site-banner.error .site-banner-icon{background:#e6483c;}
+  .site-banner-text{flex:1;font-size:14px;color:var(--paper);}
+  .site-banner-close{
+    background:none;border:none;color:var(--paper-dim);cursor:pointer;font-size:13px;
+    padding:4px 6px;flex-shrink:0;
+  }
+  .site-banner-close:hover{color:var(--paper);}
+  @media(max-width:600px){.site-banner-inner{margin:10px 12px 0;}}
+
   header{
     position:sticky;top:0;z-index:50;
     background:rgba(20,23,26,.88);
@@ -363,6 +396,14 @@
 </head>
 <body>
 
+<div id="siteBanner" class="site-banner" hidden>
+  <div class="site-banner-inner">
+    <span class="site-banner-icon">✓</span>
+    <span class="site-banner-text" id="siteBannerText">Your message was sent successfully — we'll get back to you soon.</span>
+    <button class="site-banner-close" id="siteBannerClose" aria-label="Dismiss">✕</button>
+  </div>
+</div>
+
 <header>
   <div class="wrap">
     <nav>
@@ -610,7 +651,7 @@
           <p class="diag-result-desc">—</p>
           <div class="hero-actions">
             <a href="#services" class="btn-ghost">See all services</a>
-            <a href="#contact" class="btn btn-solid">Start a conversation</a>
+            <a href="#contact" id="diagStartConvo" class="btn btn-solid">Start a conversation</a>
           </div>
           <div><button class="diag-restart">↺ Start over</button></div>
         </div>
@@ -739,10 +780,11 @@
           <h2>Tell us the problem. We'll tell you if we're a fit.</h2>
           <p>No sales deck, no lock-in pitch — just a straight read on whether this is worth pursuing, and what a pilot would look like.</p>
         </div>
-        <form class="cta-form" action="https://formspree.io/f/xgawjzjq" method="POST">
+        <form class="cta-form" id="contactForm" action="https://formspree.io/f/xgawjzjq" method="POST">
           <input type="text" name="name" placeholder="Name" required>
           <input type="email" name="email" placeholder="Work email" required>
-          <textarea name="message" rows="3" placeholder="What are you trying to solve?" required></textarea>
+          <input type="tel" name="phone" placeholder="Phone (optional)">
+          <textarea id="cta-message" name="message" rows="3" placeholder="What are you trying to solve?" required></textarea>
           <button type="submit">Send</button>
         </form>
       </div>
@@ -804,6 +846,69 @@
 
     const defaultNode = document.querySelector('.schem-node[data-default="true"]');
     if(defaultNode) selectNode(defaultNode);
+  })();
+
+  // ---- Diagnostic → Contact handoff: pre-fill the message ----
+  (function(){
+    const convoBtn = document.getElementById('diagStartConvo');
+    const msgField = document.getElementById('cta-message');
+    if(!convoBtn || !msgField) return;
+    convoBtn.addEventListener('click', ()=>{
+      const title = document.querySelector('.diag-result-title')?.textContent?.trim() || '';
+      const desc = document.querySelector('.diag-result-desc')?.textContent?.trim() || '';
+      if(title){
+        msgField.value = `I'm exploring: ${title}\n\n${desc}`;
+      }
+    });
+  })();
+
+  // ---- Contact form: submit via fetch, show banner, scroll to top ----
+  (function(){
+    const form = document.getElementById('contactForm');
+    const banner = document.getElementById('siteBanner');
+    const bannerText = document.getElementById('siteBannerText');
+    const bannerClose = document.getElementById('siteBannerClose');
+    if(!form || !banner) return;
+
+    let hideTimer;
+    function showBanner(message, isError){
+      clearTimeout(hideTimer);
+      bannerText.textContent = message;
+      banner.classList.toggle('error', !!isError);
+      banner.hidden = false;
+      requestAnimationFrame(()=> banner.classList.add('show'));
+      window.scrollTo({top:0, behavior:'smooth'});
+      hideTimer = setTimeout(hideBanner, 7000);
+    }
+    function hideBanner(){
+      banner.classList.remove('show');
+      setTimeout(()=>{ banner.hidden = true; }, 400);
+    }
+    bannerClose?.addEventListener('click', hideBanner);
+
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalLabel = submitBtn ? submitBtn.textContent : '';
+      if(submitBtn){ submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; }
+      try{
+        const res = await fetch(form.action, {
+          method:'POST',
+          body:new FormData(form),
+          headers:{'Accept':'application/json'}
+        });
+        if(res.ok){
+          form.reset();
+          showBanner("Your message was sent successfully — we'll get back to you soon.", false);
+        } else {
+          showBanner("Something went wrong sending that — please try again or email ashwath@synktra.in directly.", true);
+        }
+      } catch(err){
+        showBanner("Something went wrong sending that — please try again or email ashwath@synktra.in directly.", true);
+      } finally {
+        if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = originalLabel; }
+      }
+    });
   })();
 
   // ---- Diagnostic ----
